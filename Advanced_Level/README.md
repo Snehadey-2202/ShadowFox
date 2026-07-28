@@ -23,28 +23,61 @@ $$\text{PS} = (\text{CP} \times 1) + (\text{GT} \times 1) + (\text{C} \times 3) 
 
 ## 🚀 Quick Start Guide
 
-### 1. Install Dependencies
+### 🐳 Docker Setup (Recommended)
+
+#### Option A: Docker Compose (Easiest)
+```bash
+# Build and start the containerized Web Dashboard
+docker-compose up --build -d
+
+# Open browser: http://localhost:5000
+```
+To stop the container:
+```bash
+docker-compose down
+```
+
+#### Option B: Docker CLI
+```bash
+# 1. Build the Docker image
+docker build -t cricket-fielding-analytics .
+
+# 2. Run the interactive web dashboard container
+docker run -p 5000:5000 cricket-fielding-analytics
+
+# 3. Run automated unit tests inside Docker
+docker run --rm cricket-fielding-analytics python main.py --test
+
+# 4. Query player scouting card inside Docker
+docker run --rm cricket-fielding-analytics python main.py -p "MS Dhoni"
+```
+
+---
+
+### 💻 Local Python Setup
+
+#### 1. Install Dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2. Launch Interactive Web Dashboard
+#### 2. Launch Interactive Web Dashboard
 ```bash
 python main.py --dashboard
 ```
 Open your browser to: **`http://127.0.0.1:5000`**
 
-### 3. Run Automated Unit Test Suite
+#### 3. Run Automated Unit Test Suite
 ```bash
 python main.py --test
 ```
 
-### 4. Execute Full Pipeline (Database, CSVs, Charts)
+#### 4. Execute Full Pipeline (Database, CSVs, Charts)
 ```bash
 python main.py
 ```
 
-### 5. Query Player Scouting Card via CLI
+#### 5. Query Player Scouting Card via CLI
 ```bash
 python main.py -p "MS Dhoni"
 ```
@@ -55,6 +88,9 @@ python main.py -p "MS Dhoni"
 
 ```text
 ShadowFox/Advanced_Level/
+├── Dockerfile                             # Container build instructions
+├── docker-compose.yml                     # Container orchestration spec
+├── .dockerignore                          # Build context exclusion rules
 ├── README.md                              # Portfolio documentation
 ├── requirements.txt                       # Dependencies
 ├── models.py                              # Dataclass models & PS formula
@@ -75,3 +111,4 @@ ShadowFox/Advanced_Level/
     ├── templates/index.html               # Glassmorphic HTML template
     └── static/                            # CSS styles & JS client
 ```
+
