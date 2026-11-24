@@ -1,0 +1,21 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cricket_fielding_analytics
+    ports:
+      - "5000:5000"
+    volumes:
+      # Persist SQLite DB, generated CSVs, and PNG charts on host machine
+      - ./dataset:/app/dataset
+    environment:
+      - PORT=5000
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/favicon.ico"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 5s

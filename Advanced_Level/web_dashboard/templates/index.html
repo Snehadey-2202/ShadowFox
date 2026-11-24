@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cricket Fielding Performance Analytics | India vs England 3rd T20I (2017)</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" href="/favicon.ico" type="image/svg+xml">
+</head>
+<body>
+
+    <!-- Header Navbar -->
+    <header class="header-nav">
+        <div class="logo-area">
+            <div class="logo-icon">🏏</div>
+            <div class="logo-text">
+                <h1>Cricket Fielding Analytics Engine</h1>
+                <p>India vs England — 3rd T20I (1 Feb 2017, M. Chinnaswamy Stadium, Bengaluru)</p>
+            </div>
+        </div>
+
+        <div class="nav-controls">
+            <nav class="tabs-nav">
+                <button class="tab-btn active" data-tab="tab-leaderboard">Leaderboard</button>
+                <button class="tab-btn" data-tab="tab-scouting">Target Scouting</button>
+                <button class="tab-btn" data-tab="tab-charts">Charts Gallery</button>
+                <button class="tab-btn" data-tab="tab-logs">Delivery Log DB</button>
+            </nav>
+
+            <div class="dropdown">
+                <button class="dropdown-btn">📥 Download Dataset ▾</button>
+                <div class="dropdown-content">
+                    <a href="/api/download/player_csv">📄 Player Performance (CSV)</a>
+                    <a href="/api/download/log_csv">📋 Delivery Logs (CSV)</a>
+                    <a href="/api/download/sqlite_db">🗄️ Relational SQLite DB (.db)</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="container">
+
+        <!-- Executive KPI Grid - 4 Vibrant Color Boxes -->
+        <section class="kpi-grid">
+            <div class="kpi-card amber">
+                <div class="kpi-label">Top Performance Rank #1</div>
+                <div class="kpi-value" id="kpi-top-fielder">MS Dhoni (WK)</div>
+                <div class="kpi-subtext" id="kpi-top-ps">35 PS</div>
+            </div>
+
+            <div class="kpi-card emerald">
+                <div class="kpi-label">Net Team Runs Saved</div>
+                <div class="kpi-value" id="kpi-runs-saved">+22</div>
+                <div class="kpi-subtext">Boundary & Ring Restrictions</div>
+            </div>
+
+            <div class="kpi-card rose">
+                <div class="kpi-label">Total Fielding Dismissals</div>
+                <div class="kpi-value" id="kpi-dismissals">9</div>
+                <div class="kpi-subtext">Catches, Stumpings & Run-outs</div>
+            </div>
+
+            <div class="kpi-card cyan">
+                <div class="kpi-label">Deliveries Monitored</div>
+                <div class="kpi-value" id="kpi-deliveries">120</div>
+                <div class="kpi-subtext">Full 20 Overs Tracking</div>
+            </div>
+        </section>
+
+        <!-- Tab 1: Leaderboard -->
+        <section id="tab-leaderboard" class="tab-view active">
+            <div class="card-panel">
+                <div class="panel-header">
+                    <h2>🏆 Team Performance Score (PS) Leaderboard</h2>
+                    <span style="font-size: 0.95rem; color: var(--text-secondary);">Sorted by Empirical Formula PS</span>
+                </div>
+
+                <!-- Formula Banner -->
+                <div class="formula-banner">
+                    📐 <strong>Empirical PS Formula:</strong> PS = (CP × 1) + (GT × 1) + (C × 3) + (DC × -3) + (ST × 3) + (RO × 3) + (MRO × -2) + (DH × 2) + RS
+                </div>
+
+                <div class="table-responsive">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Player Name</th>
+                                <th>Primary Role & Position</th>
+                                <th>Clean Picks (+1)</th>
+                                <th>Good Throws (+1)</th>
+                                <th>Catches (+3)</th>
+                                <th>Stumpings (+3)</th>
+                                <th>Run Outs (+3)</th>
+                                <th>Direct Hits (+2)</th>
+                                <th>Runs Saved</th>
+                                <th>Performance Score</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leaderboard-tbody">
+                            <!-- Dynamic Content -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab 2: Scouting Profiles -->
+        <section id="tab-scouting" class="tab-view">
+            <div class="card-panel" style="background: transparent; border: none; padding: 0; box-shadow: none;">
+                <div class="panel-header" style="margin-bottom: 1.5rem;">
+                    <h2>🎯 Target Player Defensive & Scouting Profiles</h2>
+                    <span style="font-size: 0.95rem; color: var(--text-secondary);">Analytical Assessments for Dhoni, Kohli & Pandya</span>
+                </div>
+                <div class="scouting-grid" id="scouting-grid">
+                    <!-- Dynamic Content -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab 3: Charts Gallery -->
+        <section id="tab-charts" class="tab-view">
+            <div class="card-panel">
+                <div class="panel-header">
+                    <h2>📊 High-Resolution Statistical Charts Gallery</h2>
+                    <span style="font-size: 0.95rem; color: var(--text-secondary);">Click any chart to zoom full-screen</span>
+                </div>
+                <div class="charts-grid" id="charts-grid">
+                    <!-- Dynamic Content -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab 4: Delivery Log DB -->
+        <section id="tab-logs" class="tab-view">
+            <div class="card-panel">
+                <div class="panel-header">
+                    <h2>🗄️ Ball-by-Ball Live Delivery Database Log</h2>
+                    <span style="font-size: 0.95rem; color: var(--text-secondary);">120 Legal Deliveries (20 Overs)</span>
+                </div>
+
+                <!-- Filters -->
+                <div class="filter-row">
+                    <input type="text" id="search-input" class="search-input" placeholder="🔍 Instant search by player, position, over, or description...">
+                    <select id="over-filter" class="select-input">
+                        <!-- Dynamic over options -->
+                    </select>
+                    <select id="position-filter" class="select-input">
+                        <option value="all">All Positions</option>
+                        <option value="Wicketkeeper">Wicketkeeper</option>
+                        <option value="Infield">Infield</option>
+                        <option value="Outfield">Outfield</option>
+                    </select>
+                    <select id="dismissal-filter" class="select-input">
+                        <option value="all">All Events</option>
+                        <option value="catch">Catches</option>
+                        <option value="stumping">Stumpings</option>
+                        <option value="runout">Run Outs</option>
+                    </select>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Delivery</th>
+                                <th>Match Setup (Batter vs Bowler)</th>
+                                <th>Fielder & Position</th>
+                                <th>Fielding Action Description</th>
+                                <th>Key Metric Event</th>
+                                <th>Runs Saved</th>
+                            </tr>
+                        </thead>
+                        <tbody id="logs-tbody">
+                            <!-- Dynamic Content -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Chart Lightbox Zoom Modal -->
+    <div id="chart-modal" class="modal-overlay">
+        <span id="modal-close" class="modal-close">&times;</span>
+        <img id="modal-img" class="modal-content" src="" alt="Zoomed Chart">
+    </div>
+
+    <footer>
+        <p>© 2026 ShadowFox Advanced Level Python Development — Task 3: Cricket Fielding Performance Analysis</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>
