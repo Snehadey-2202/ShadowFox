@@ -1,3 +1,8 @@
+"""
+main.py
+CLI entrypoint for ShadowFox Advanced Level Python Development Internship Task 3: Cricket Fielding Performance Analysis.
+"""
+
 import sys
 import os
 import argparse
@@ -95,7 +100,7 @@ def launch_dashboard(port: int = 5000):
     run_pipeline(quiet=True)
     web_dir = os.path.join(os.path.dirname(__file__), "web_dashboard")
     sys.path.insert(0, web_dir)
-    from app import run_server
+    from web_dashboard.app import run_server
     print(f"\n[+] Starting Interactive Flask Web Dashboard Server on http://127.0.0.1:{port}...")
     print("[+] Press Ctrl+C to terminate server.")
     run_server(port=port)

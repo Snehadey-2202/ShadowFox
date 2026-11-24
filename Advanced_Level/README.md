@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+# ShadowFox
+Task of ShadowFox Python Development Internship
+=======
 # 🏏 Cricket Fielding Performance Analysis Engine & Interactive Web Dashboard
 
 **ShadowFox Advanced Level Python Development Internship — Task 3**
@@ -112,3 +116,4 @@ ShadowFox/Advanced_Level/
     └── static/                            # CSS styles & JS client
 ```
 
+>>>>>>> 0e71d97 (advance_level project)
