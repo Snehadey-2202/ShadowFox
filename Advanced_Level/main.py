@@ -1,8 +1,3 @@
-"""
-main.py
-CLI entrypoint for ShadowFox Advanced Level Python Development Internship Task 3: Cricket Fielding Performance Analysis.
-"""
-
 import sys
 import os
 import argparse
